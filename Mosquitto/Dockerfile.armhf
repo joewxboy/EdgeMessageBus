@@ -16,4 +16,10 @@ COPY mosquitto.conf /mosquitto/config
 
 RUN /usr/sbin/mosquitto_passwd -b /mosquitto/config/pwfile ${MQTT_USERNAME} ${MQTT_PASSWORD}
 
+EXPOSE 1883 9001
+
+COPY docker-entrypoint.sh /usr/bin/
+RUN chmod 755 /usr/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
