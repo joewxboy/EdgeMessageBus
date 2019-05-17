@@ -1,0 +1,19 @@
+FROM alpine:edge
+
+ARG MQTT_USERNAME
+ARG MQTT_PASSWORD
+
+ENV MQTT_PASSWORD=$MQTT_PASSWORD
+ENV MQTT_USERNAME=$MQTT_USERNAME
+
+RUN apk add --no-cache mosquitto
+
+RUN mkdir -p /mosquitto/config /mosquitto/data /mosquitto/log && \
+    chown -R mosquitto:mosquitto /mosquitto && \
+    touch /mosquitto/config/pwfile
+
+COPY mosquitto.conf /mosquitto/config
+
+RUN /usr/bin/mosquitto_passwd -b /mosquitto/config/pwfile ${MQTT_USERNAME} ${MQTT_PASSWORD}
+
+CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
