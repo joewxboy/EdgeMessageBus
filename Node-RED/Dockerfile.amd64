@@ -10,7 +10,7 @@ ENV MQTT_USERNAME=$MQTT_USERNAME
 ENV MQTT_TOPIC=$MQTT_TOPIC
 ENV MQTT_BROKER=$MQTT_BROKER
 
-RUN npm install node-red-dashboard
+RUN npm i node-red-dashboard
 
 COPY flows.json /data/my_flows.json
 

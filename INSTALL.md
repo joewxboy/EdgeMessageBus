@@ -29,7 +29,7 @@ NOTE: Change `/home/pi` to your path prefix.
 sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
   -t mosqtt -f- /home/pi/EdgeMessageBus/Mosquitto/ < Dockerfile.armhf
-sudo docker run --rm -it -p 1883:1883 mosqtt
+sudo docker run --rm -it -p 1883:1883 --name myqt mosqtt
 ```
 
 ### End of Installing MQTT
@@ -74,7 +74,7 @@ cd ../Node-RED
 export MQTT_USERNAME=[username here, ex. "mqtt"]
 export MQTT_PASSWORD=[password here]
 export MQTT_TOPIC=[topic here, ex. "test/json"]
-export MQTT_BROKER=[broker URL here, ex. "http://127.0.0.1/"]
+export MQTT_BROKER="myqt"
 ```
 
 NOTE: The TOPIC and BROKER variables are new, and weren't defined earlier.
@@ -86,8 +86,8 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
   --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
   --build-arg MQTT_BROKER=${MQTT_BROKER} \
-   -t nred -f- ./ < Dockerfile.armhf
-sudo docker run --rm -it -p 1880:1880 nred
+  -t nred -f- ./ < Dockerfile.armhf
+sudo docker run --rm -it -p 1880:1880 --link myqt:myqt nred
 ```
 
 NOTE: The above refers to a Dockerfile for the `armhf` architecture, like the Raspberry Pi. 

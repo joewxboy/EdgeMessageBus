@@ -31,7 +31,7 @@ export WEATHER_API_URL=https://<YOUR_API_KEY>:<YOUR_API_PASSWORD>@twcservice.myb
 export MQTT_USERNAME=<YOUR_MQTT_USERNAME>
 export MQTT_PASSWORD=<YOUR_MQTT_PASSWORD>
 export MQTT_TOPIC=<YOUR_MQTT_TOPIC>
-export MQTT_BROKER=<YOUR_MQTT_BROKER_URL>
+export MQTT_BROKER="myqt"
 ```
 
 And then build and run the Docker image.
@@ -46,7 +46,7 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg WEATHER_API_KEY=${WEATHER_API_KEY} \
   --build-arg WEATHER_API_URL=${WEATHER_API_URL} \
   ./ -t wxapi
-sudo docker run --rm -it wxapi
+sudo docker run --rm -it --link myqt:myqt wxapi
 ```
 
 ### End of Installation
