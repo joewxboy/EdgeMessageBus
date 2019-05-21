@@ -52,13 +52,13 @@ TRY: Connect to your MQTT Server with a client (I like MQTTLens), subscribe to y
 }
 ```
 
-## Installing the Weather API
+## Install the Weather API
 
 
 
-## Installing the WeatherHAT
+## Install the WeatherHAT Display
 
 
 
-## Installing the Node-RED Dashboard
+## Install the Node-RED Dashboard
 

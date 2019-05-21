@@ -1,0 +1,23 @@
+FROM nodered/node-red-docker:slim-v8
+
+ARG MQTT_USERNAME
+ARG MQTT_PASSWORD
+ARG MQTT_TOPIC
+ARG MQTT_BROKER
+
+ENV MQTT_PASSWORD=$MQTT_PASSWORD
+ENV MQTT_USERNAME=$MQTT_USERNAME
+ENV MQTT_TOPIC=$MQTT_TOPIC
+ENV MQTT_BROKER=$MQTT_BROKER
+
+RUN npm install node-red-dashboard
+
+COPY flows.json /data/my_flows.json
+
+EXPOSE 1880
+
+# Environment variable holding file path for flows configuration
+ENV FLOWS=my_flows.json
+ENV NODE_PATH=/usr/src/node-red/node_modules:/data/node_modules
+
+CMD ["npm", "start", "--", "--userDir", "/data"]

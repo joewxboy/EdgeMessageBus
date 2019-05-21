@@ -5,6 +5,7 @@ This will install a dashboard that allows you to see what is happening in the Ed
 ## Prerequisites
 
 * Docker
+* Running MQTT instance
 
 ## Installation
 
@@ -24,6 +25,10 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
   --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
   --build-arg MQTT_BROKER=${MQTT_BROKER} \
-   -t nred
-sudo docker run --rm -it -p 1880:1880 --name nred
+   -t nred -f- ./ < Dockerfile.armhf
+sudo docker run --rm -it -p 1880:1880 nred
 ```
+
+Then connect to the Node-RED Dashboard in your browser at: 
+http://[machine IP address]:1880/ui/#/0
+
