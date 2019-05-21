@@ -1,0 +1,9 @@
+{
+    "type":"location",
+    "loctype":"geocode",
+    "data":{
+        "lat":"34.02",
+        "lon":"-84.62"
+    },
+    "child":[]
+}
