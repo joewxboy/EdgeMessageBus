@@ -21,44 +21,49 @@ You can reference [the documentation here](https://cloud.ibm.com/docs/services/W
 
 ## Getting Started on your local machine
 
-1. Clone this repository
+### Set the environment variables
 
-   ``` bash
-   $ git clone https://github.ibm.com/joe-pearson/weather-python-api2mqtt.git
-   $ cd weather-python-api2mqtt
-   ```  
+Set your Weather API key `<YOUR_API_KEY>` and credentials `<YOUR_API_PASSWORD>` when running the application
 
-2. Install the dependencies
+``` bash
+export WEATHER_API_KEY=<YOUR_API_KEY>
+export WEATHER_API_URL=https://<YOUR_API_KEY>:<YOUR_API_PASSWORD>@twcservice.mybluemix.net/api/weather
+export MQTT_USERNAME=<YOUR_MQTT_USERNAME>
+export MQTT_PASSWORD=<YOUR_MQTT_PASSWORD>
+export MQTT_TOPIC=<YOUR_MQTT_TOPIC>
+export MQTT_BROKER=<YOUR_MQTT_BROKER_URL>
+```
 
-   ``` bash
-   $ pip3 install -r requirements.txt
-   ```
+And then build and run the Docker image.
 
-3. Set your Weather API key `<YOUR_API_KEY>` and credentials `<YOUR_API_PASSWORD>` when running the application
+NOTE: The image will throw errors and die if an MQTT service is not available as configured.
 
-   ``` bash
-   $ export WEATHER_API_KEY=<YOUR_API_KEY>
-   $ export WEATHER_API_URL=https://<YOUR_API_KEY>:<YOUR_API_PASSWORD>@twcservice.mybluemix.net/api/weather
-   $ export MQTT_USERNAME=<YOUR_MQTT_USERNAME>
-   $ export MQTT_PASSWORD=<YOUR_MQTT_PASSWORD>
-   $ export MQTT_TOPIC=<YOUR_MQTT_TOPIC>
-   $ export MQTT_BROKER=<YOUR_MQTT_BROKER_URL>
-   $ python3 app.py
-   ```
+``` bash
+sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
+  --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
+  --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
+  --build-arg MQTT_BROKER=${MQTT_BROKER} \
+  --build-arg WEATHER_API_KEY=${WEATHER_API_KEY} \
+  --build-arg WEATHER_API_URL=${WEATHER_API_URL} \
+  ./ -t wxapi
+sudo docker run --rm -it wxapi
+```
 
-4. Publish a location JSON Object to the MQTT Topic and watch the app respond with the weather forecast
+### End of Installation
 
-    ``` json
-    {
-        "type":"location",
-        "loctype":"geocode",
-        "data":{
-            "lat":"34.02",
-            "lon":"-84.62"
-        },
-        "child":[]
-    }
-    ```
+TRY: Publish a location JSON Object to the MQTT Topic and watch the app respond with the weather forecast
+
+``` json
+{
+    "type":"location",
+    "loctype":"geocode",
+    "data":{
+        "lat":"34.02",
+        "lon":"-84.62"
+    },
+    "child":[]
+}
+```
 
 ## License
 

@@ -16,7 +16,7 @@
 __name__ = 'dailyforecast'
 
 import json
-from lib.apiutil import host, default_params
+from apiutil import host, default_params
 
 def request_options (lat, lon, days = 3, units = 'e'):
   d = days if days in [3, 5, 7, 10, 15] else 3

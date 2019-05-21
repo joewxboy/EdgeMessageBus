@@ -1,52 +1,14 @@
 import os, requests, time, schedule, json
 
-import lib.weatheralertheadlines as alert_headlines
-import lib.weatheralertdetails as alert_details
-import lib.dailyforecast as daily_forecast
-import lib.tropicalforecastprojectedpath as tropical_forecast
-import lib.severeweatherpowerdisruptionindex as power_disruption
+import dailyforecast as daily_forecast
 import paho.mqtt.client as mqtt
 
-from lib.apiutil import request_headers, default_params
-from lib.msgutil import create_message
+from apiutil import request_headers, default_params
+from msgutil import create_message
 
 def handleFail(err):
   # API call failed...
   return('Status code: %d' % (err.status_code) )
-
-def callWeatherAlertHeadlines(lat, lon):
-  url, params = alert_headlines.request_options(lat, lon)
-  headers = request_headers()
-
-  r = requests.get(url, headers=headers)
-  if r.status_code == 200:
-    detailKeys = alert_headlines.handle_response(r.json())
-    if detailKeys and len(detailKeys) > 0:
-      for detailKey in detailKeys:
-        print('Detail key: '+detailKey)
-        callWeatherAlertDetails(detailKey)
-  else:
-    handleFail(r)
-
-def callWeatherAlertDetails(detailKey):
-  url, params = alert_details.request_options(detailKey)
-  headers = request_headers()
-
-  r = requests.get(url, headers=headers)
-  if r.status_code == 200:
-    alert_details.handle_response(r.json())
-  else:
-    handleFail(r)
-
-def callTropicalForecastProjectedPath(basin='AL', units='m', nautical=True, source='all'):
-  url, params = tropical_forecast.request_options(basin, units, nautical, source)
-  headers = request_headers()
-
-  r = requests.get(url, headers=headers)
-  if r.status_code == 200:
-    tropical_forecast.handle_response(r.json())
-  else:
-    handleFail(r)
 
 def callDailyForecast(lat, lon, units = 'm'):
   url, params = daily_forecast.request_options(lat, lon)
@@ -61,16 +23,6 @@ def callDailyForecast(lat, lon, units = 'm'):
   else:
     # print("got error")
     return handleFail(r)
-
-def callSevereWeatherPowerDisruption(lat, lon):
-  url, params = power_disruption.request_options(lat, lon)
-  headers = request_headers()
-
-  r = requests.get(url, headers=headers)
-  if r.status_code == 200:
-    power_disruption.handle_response(r.json())
-  else:
-    handleFail(r)
 
 loc = {
   'boston': { 'lat': '42.36', 'lon': '-71.06' }, # Boston, MA, United States

@@ -29,6 +29,8 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
 sudo docker run --rm -it -p 1880:1880 nred
 ```
 
-Then connect to the Node-RED Dashboard in your browser at: 
+### End of Installation
+
+TRY: Then connect to the Node-RED Dashboard in your browser at: 
 http://[machine IP address]:1880/ui/#/0
 

@@ -1,6 +1,6 @@
 import os
 
-__name__ = 'dailyforecast'
+__name__ = 'apiutil'
 
 host = os.environ['WEATHER_API_URL']
 

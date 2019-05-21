@@ -62,3 +62,44 @@ TRY: Connect to your MQTT Server with a client (I like MQTTLens), subscribe to y
 
 ## Install the Node-RED Dashboard
 
+Assuming you are still in the `Display` directory, change over to the `Node-RED` folder:
+
+``` bash
+cd ../Node-RED
+```
+
+### Define required environment variables
+
+``` bash
+export MQTT_USERNAME=[username here, ex. "mqtt"]
+export MQTT_PASSWORD=[password here]
+export MQTT_TOPIC=[topic here, ex. "test/json"]
+export MQTT_BROKER=[broker URL here, ex. "http://127.0.0.1/"]
+```
+
+NOTE: The TOPIC and BROKER variables are new, and weren't defined earlier.
+
+### Build the Node-RED Dashboard Docker image and run it.
+
+``` bash
+sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
+  --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
+  --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
+  --build-arg MQTT_BROKER=${MQTT_BROKER} \
+   -t nred -f- ./ < Dockerfile.armhf
+sudo docker run --rm -it -p 1880:1880 nred
+```
+
+NOTE: The above refers to a Dockerfile for the `armhf` architecture, like the Raspberry Pi. 
+If you're using an x86_64 machine, use the `Dockerfile.amd64` file instead. 
+
+### End of Installing the Node-RED Dashboard
+
+TRY: Connect to the Node-RED Dashboard web UI in your browser at: 
+http://[machine IP address]:1880/ui/#/0
+
+If you have the Mosquitto, Weather, and Display services running, 
+then you should be able to click a button for a location and see the 
+corresponding weather for that location load into the center of the dashboard, 
+and the buttons representing the Display light up for five seconds for the 
+relevant indicators for that location's weather.
