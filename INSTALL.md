@@ -2,7 +2,7 @@
 
 NOTE: These directions assume Raspbian on RPi 3 B+.
 
-## Set up MQTT
+## Install MQTT
 
 Starting from your home directory or wherever you want to build this from (in my example, it is `/home/pi`):
 
@@ -37,6 +37,20 @@ sudo docker run --rm -it -p 1883:1883 mosqtt
 You have now created and exposed an MQTT server with the credentials you specified on the RPi at port 1883.
 
 The server can be stopped by pressing Control-c in the terminal.
+
+TRY: Connect to your MQTT Server with a client (I like MQTTLens), subscribe to your MQTT_TOPIC, and publish a small JSON object to your MQTT_TOPIC and watch it show up in your subscription.
+
+``` json
+{
+    "type":"location",
+    "loctype":"geocode",
+    "data":{
+        "lat":"34.02",
+        "lon":"-84.62"
+    },
+    "child":[]
+}
+```
 
 ## Installing the Weather API
 
