@@ -1,10 +1,10 @@
-# Edge Message Bus
+# Install Edge Message Bus
 
 NOTE: These directions assume Raspbian on RPi 3 B+.
 
 ## Set up MQTT
 
-Starting from your home directory or wherever you want to build this from (in my example, it is ``/home/pi`):
+Starting from your home directory or wherever you want to build this from (in my example, it is `/home/pi`):
 
 ### Clone EdgeMessageBus repo
 ``` bash
@@ -32,7 +32,19 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
 sudo docker run --rm -it -p 1883:1883 mosqtt
 ```
 
-## You have now created and exposed an MQTT server with the credentials you specified on the RPi at port 1883.
+### End of Installing MQTT
+ 
+You have now created and exposed an MQTT server with the credentials you specified on the RPi at port 1883.
 
 The server can be stopped by pressing Control-c in the terminal.
+
+## Installing the Weather API
+
+
+
+## Installing the WeatherHAT
+
+
+
+## Installing the Node-RED Dashboard
 
