@@ -54,11 +54,91 @@ TRY: Connect to your MQTT Server with a client (I like MQTTLens), subscribe to y
 
 ## Install the Weather API
 
+### Obtain a Weather Company API Key
 
+Sign up for [IBM Cloud](https://cloud.ibm.com/login) and 
+provision the [Weather Company Data service](https://cloud.ibm.com/catalog/services/weather-company-data). 
+The Weather Company Data service uses the following [APIs](https://twcservice.mybluemix.net/rest-api/). 
+You can reference [the documentation here](https://cloud.ibm.com/docs/services/Weather?topic=weather-insights_weather_overview).
+
+### Get in the Right Directory
+
+``` bash
+cd ../Weather
+```
+
+### Define environment variables
+
+Set your Weather API key `<YOUR_API_KEY>` and credentials `<YOUR_API_PASSWORD>` when running the application
+
+``` bash
+export WEATHER_API_KEY=<YOUR_API_KEY>
+export WEATHER_API_URL=https://<YOUR_API_KEY>:<YOUR_API_PASSWORD>@twcservice.mybluemix.net/api/weather
+export MQTT_USERNAME=[username here, ex. "mqtt"]
+export MQTT_PASSWORD=[password here]
+export MQTT_TOPIC=[topic here, ex. "test/json"]
+export MQTT_BROKER="myqt"
+```
+
+### Build the Weather docker image and run it.
+
+NOTE: The image will throw errors and die if an MQTT service is not available as configured.
+
+``` bash
+sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
+  --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
+  --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
+  --build-arg MQTT_BROKER=${MQTT_BROKER} \
+  --build-arg WEATHER_API_KEY=${WEATHER_API_KEY} \
+  --build-arg WEATHER_API_URL=${WEATHER_API_URL} \
+  ./ -t wxapi
+sudo docker run --rm -it --link myqt:myqt wxapi
+```
+
+### End of Installing the Weather API
+
+TRY: Publish a location JSON Object to the MQTT Topic and watch the app respond with the weather forecast
+
+``` json
+{
+    "type":"location",
+    "loctype":"geocode",
+    "data":{
+        "lat":"34.02",
+        "lon":"-84.62"
+    },
+    "child":[]
+}
+```
 
 ## Install the WeatherHAT Display
 
+### Get in the Right Directory
 
+``` bash
+cd ../Display
+```
+
+### Define environment variables
+
+I'll assume you've already done this for a previous step.
+
+### Build the WeatherHAT Display docker image and run it.
+
+``` bash
+sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
+  --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
+  --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
+  --build-arg MQTT_BROKER=${MQTT_BROKER} \
+  --build-arg WEATHER_API_KEY=${WEATHER_API_KEY} \
+  --build-arg WEATHER_API_URL=${WEATHER_API_URL} \
+  ./ -t wxhat-pdm
+sudo docker run --rm -it --device /dev/i2c-1 --privileged --link myqt:myqt wxhat-pdm
+```
+
+### End of Installing the WeatherHAT Display
+
+TRY: Publish a location JSON Object to the MQTT Topic and watch the app respond
 
 ## Install the Node-RED Dashboard
 
