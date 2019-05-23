@@ -111,20 +111,20 @@ def on_message(client, userdata, msg):
     elif cond["night"]:
         shortcast = cond["night"]["shortcast"]
         iconcode = cond["night"]["icon_code"]
-    print(shortcast)
     print(iconcode)
+    print(shortcast)
     icon_cond = icon_dict[iconcode]
     # print(type(icon_cond))
     if type(icon_cond) == str:
         display_condition(icon_cond)
         msgPayload = create_message("display", icon_cond, "")
-        print("sending payload for "+icon_cond)
+        print(msgPayload)
         client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
     elif type(icon_cond) == list:
         for icon in icon_cond:
             display_condition(icon)
             msgPayload = create_message("display", icon, "")
-            print("sending payload for "+icon)
+            print(msgPayload)
             client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
     
 params = default_params()
