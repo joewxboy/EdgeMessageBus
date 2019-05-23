@@ -25,7 +25,7 @@ RUN git clone https://github.com/CyntechUK/WeatherHAT.git
 COPY *.py /WeatherHAT/
 
 WORKDIR /rpi_ws281x
-RUN scons
+RUN sed -i 's/0755/0o755/g' SConscript && scons
 
 WORKDIR /rpi_ws281x/python
 RUN python setup.py install
