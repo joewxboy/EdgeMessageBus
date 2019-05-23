@@ -115,12 +115,12 @@ def on_message(client, userdata, msg):
     print(iconcode)
     icon_cond = icon_dict[iconcode]
     print(type(icon_cond))
-    if type(icon_cond) == "str":
+    if type(icon_cond) == "<class 'str'>":
         display_condition(icon_cond)
         msgPayload = create_message("display", icon_cond, "")
         print("sending payload for "+icon_cond)
         client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
-    elif type(icon_cond) == "list":
+    elif type(icon_cond) == "<class 'list'>":
         for icon in icon_cond:
             display_condition(icon)
             msgPayload = create_message("display", icon, "")
