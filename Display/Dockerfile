@@ -31,6 +31,7 @@ WORKDIR /rpi_ws281x/python
 RUN python setup.py install
 
 WORKDIR /WeatherHAT
+RUN sed -i 's/from smbus /from smbus2 /g' weatherhat.py
 
 COPY docker-entrypoint.sh /usr/bin/
 RUN chmod 755 /usr/bin/docker-entrypoint.sh
