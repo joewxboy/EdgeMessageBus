@@ -1,6 +1,6 @@
 FROM python:3-alpine
 
-RUN apk add git && python -m pip install --upgrade pip && \
+RUN apk add git gcc && python -m pip install --upgrade pip && \
     pip3 install schedule requests paho-mqtt scons smbus2 gpiozero
 
 # FROM raspbian/stretch
