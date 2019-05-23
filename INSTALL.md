@@ -28,7 +28,7 @@ NOTE: Change `/home/pi` to your path prefix.
 ``` bash
 sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
-  -t mosqtt -f- /home/pi/EdgeMessageBus/Mosquitto/ < Dockerfile.armhf
+  -t mosqtt -f- ./ < Dockerfile.armhf
 sudo docker run --rm -it -p 1883:1883 --name myqt mosqtt
 ```
 
