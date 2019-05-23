@@ -100,30 +100,31 @@ def on_message(client, userdata, msg):
   params = default_params()
   shortcast = ""
   iconcode = "44" ## n/a icon
-  # print(msg.topic+" "+str(msg.payload))
+  print(msg.topic)
   str_payload = json.loads(msg.payload)
   if str_payload["type"] == "weather":
     cond = str_payload["data"][0]
-    
+    print(cond)
     if cond["day"]:
         shortcast = cond["day"]["shortcast"]
         iconcode = cond["day"]["icon_code"]
     elif cond["night"]:
         shortcast = cond["night"]["shortcast"]
         iconcode = cond["night"]["icon_code"]
-    
+    print(shortcast)
+    print(iconcode)
     icon_cond = icon_dict[iconcode]
     
     if type(icon_cond) == "str":
         display_condition(icon_cond)
         msgPayload = create_message("display", icon_cond, "")
-        # print("sending payload")
+        print("sending payload for "+icon_cond)
         client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
     elif type(icon_cond) == "list":
         for icon in icon_cond:
             display_condition(icon)
             msgPayload = create_message("display", icon, "")
-            # print("sending payload")
+            print("sending payload for "+icon)
             client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
     
 params = default_params()
