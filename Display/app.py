@@ -115,7 +115,7 @@ def on_message(client, userdata, msg):
     print(iconcode)
     icon_cond = icon_dict[iconcode]
     # print(type(icon_cond))
-    if type(icon_cond) == basestring:
+    if type(icon_cond) == str:
         display_condition(icon_cond)
         msgPayload = create_message("display", icon_cond, "")
         print("sending payload for "+icon_cond)
