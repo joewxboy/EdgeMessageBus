@@ -1,7 +1,12 @@
-FROM raspbian/stretch
+FROM python:3-alpine
+
+RUN python -m pip install --upgrade pip && \
+    pip3 install schedule requests paho-mqtt git scons smbus gpiozero rpi.gpio
+
+# FROM raspbian/stretch
 
 # Install required dependencies
-RUN apt-get -y update && apt-get -y install sudo wget curl jq build-essential python-dev git scons swig python-smbus python-pip python3-gpiozero python-gpiozero python-pkg-resources python3-pkg-resources python-rpi.gpio python3-rpi.gpio && pip install paho-mqtt
+# RUN apt-get -y update && apt-get -y build-essential python-dev git scons swig python-smbus python-pip python3-gpiozero python-gpiozero python-pkg-resources python3-pkg-resources python-rpi.gpio python3-rpi.gpio && pip install paho-mqtt
 
 ARG MQTT_USERNAME
 ARG MQTT_PASSWORD
