@@ -1,7 +1,7 @@
 FROM python:3-alpine
 
 RUN python -m pip install --upgrade pip && \
-    pip3 install schedule requests paho-mqtt scons smbus gpiozero rpi.gpio
+    pip3 install gcc7 i2c schedule requests paho-mqtt scons smbus gpiozero rpi.gpio
 
 # FROM raspbian/stretch
 
