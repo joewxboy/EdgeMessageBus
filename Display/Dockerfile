@@ -31,7 +31,6 @@ RUN python setup.py install
 
 WORKDIR /WeatherHAT
 
-
 COPY docker-entrypoint.sh /usr/bin/
 RUN chmod 755 /usr/bin/docker-entrypoint.sh
 

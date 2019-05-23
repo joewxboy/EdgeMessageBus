@@ -10,54 +10,54 @@ from time import sleep
 wh = WeatherHat()
 
 icon_dict = [
-    "storm", # 0 tornado
-    "storm", # tropical storm
-    "storm", # hurricane
-    ["cloud","storm","raining"], # strong storms
-    ["cloud","storm","raining"], # thunderstorms
-    ["cloud","raining"], # 5 rain / snow
-    ["cloud","raining"], # rain / sleet
-    ["cloud","raining"], # wintry mix
-    ["cloud","raining"], # freezing drizzle
-    ["cloud","raining"], # drizzle
-    ["cloud","raining"], # 10 freezing rain
-    ["cloud","raining"], # showers
-    ["cloud","raining"], # rain
-    ["cloud","raining"], # flurries
-    ["cloud","raining"], # snow showers
-    "raining", # 15 blowing / drifting snow
-    ["cloud","raining"], # snow
-    ["cloud","raining"], # hail
-    ["cloud","raining"], # sleet
-    "fog", # blowing dust / sandstorm
-    "fog", # 20 foggy
-    "fog", # haze
-    "fog", # smoke
-    "wind", # breezy
-    "wind", # windy
-    ["wind","raining"], # 25 frigid / ice crystals
-    "cloud", # cloudy
-    "cloud", # mostly cloudy
-    ["cloud","sun"], # mostly cloudy
-    "cloud", # partly cloudy
-    ["cloud","sun"], # 30 partly cloudy
-    "clear", # clear
-    "sun", # sunny
-    "clear", # fair, mostly clear
-    "sun", # fair, mostly sunny
-    ["cloud","raining"], # 35 mixed rain and hail
-    "sun", # hot
-    ["sun","cloud","raining","storm"], # isolated thunderstorms
-    ["sun","cloud","raining","storm"], # scattered thunderstorms
-    ["cloud","raining"], # scattered showers
-    ["cloud","raining"], # 40 heavy rain
-    ["cloud","sun","raining"], # scattered show showers
-    ["cloud","raining"], # heavy snow
-    ["cloud","raining"], # blizzard
-    ["n/a"], # not available
-    ["cloud","raining"], # 45 scattered showers
-    ["cloud","raining"], # scattered snow showers
-    ["cloud","raining","storm"] # scattered thunderstorms
+    "storm",                           #  0 tornado
+    "storm",                           #  1 tropical storm
+    "storm",                           #  2 hurricane
+    ["cloud","storm","raining"],       #  3 strong storms
+    ["cloud","storm","raining"],       #  4 thunderstorms
+    ["cloud","raining"],               #  5 rain / snow
+    ["cloud","raining"],               #  6 rain / sleet
+    ["cloud","raining"],               #  7 wintry mix
+    ["cloud","raining"],               #  8 freezing drizzle
+    ["cloud","raining"],               #  9 drizzle
+    ["cloud","raining"],               # 10 freezing rain
+    ["cloud","raining"],               # 11 showers
+    ["cloud","raining"],               # 12 rain
+    ["cloud","raining"],               # 13 flurries
+    ["cloud","raining"],               # 14 snow showers
+    "raining",                         # 15 blowing / drifting snow
+    ["cloud","raining"],               # 16 snow
+    ["cloud","raining"],               # 17 hail
+    ["cloud","raining"],               # 18 sleet
+    "fog",                             # 19 blowing dust / sandstorm
+    "fog",                             # 20 foggy
+    "fog",                             # 21 haze
+    "fog",                             # 22 smoke
+    "wind",                            # 23 breezy
+    "wind",                            # 24 windy
+    ["wind","raining"],                # 25 frigid / ice crystals
+    "cloud",                           # 26 cloudy
+    "cloud",                           # 27 mostly cloudy
+    ["cloud","sun"],                   # 28 mostly cloudy
+    "cloud",                           # 29 partly cloudy
+    ["cloud","sun"],                   # 30 partly cloudy
+    "clear",                           # 31 clear
+    "sun",                             # 32 sunny
+    "clear",                           # 33 fair, mostly clear
+    "sun",                             # 34 fair, mostly sunny
+    ["cloud","raining"],               # 35 mixed rain and hail
+    "sun",                             # 36 hot
+    ["sun","cloud","raining","storm"], # 37 isolated thunderstorms
+    ["sun","cloud","raining","storm"], # 38 scattered thunderstorms
+    ["cloud","raining"],               # 39 scattered showers
+    ["cloud","raining"],               # 40 heavy rain
+    ["cloud","sun","raining"],         # 41 scattered show showers
+    ["cloud","raining"],               # 42 heavy snow
+    ["cloud","raining"],               # 43 blizzard
+    ["n/a"],                           # 44 not available
+    ["cloud","raining"],               # 45 scattered showers
+    ["cloud","raining"],               # 46 scattered snow showers
+    ["cloud","raining","storm"]        # 47 scattered thunderstorms
 ]
 
 def display_condition(condition):
@@ -126,7 +126,6 @@ def on_message(client, userdata, msg):
             # print("sending payload")
             client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
     
-
 params = default_params()
 client = mqtt.Client()
 client.on_connect = on_connect
