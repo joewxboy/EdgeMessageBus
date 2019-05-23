@@ -6,7 +6,7 @@ ARG MQTT_PASSWORD
 ENV MQTT_PASSWORD=$MQTT_PASSWORD
 ENV MQTT_USERNAME=$MQTT_USERNAME
 
-RUN apk add --no-cache mosquitto
+RUN apk add mosquitto
 
 RUN mkdir -p /mosquitto/config /mosquitto/data /mosquitto/log && \
     chown -R mosquitto:mosquitto /mosquitto && \

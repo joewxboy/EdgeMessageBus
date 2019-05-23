@@ -1,6 +1,6 @@
 FROM python:3-alpine
 
-RUN python -m pip install --upgrade pip && \
+RUN apk add git && python -m pip install --upgrade pip && \
     pip3 install schedule requests paho-mqtt scons smbus2 gpiozero
 
 # FROM raspbian/stretch
@@ -12,15 +12,11 @@ ARG MQTT_USERNAME
 ARG MQTT_PASSWORD
 ARG MQTT_TOPIC
 ARG MQTT_BROKER
-ARG WEATHER_API_KEY
-ARG WEATHER_API_URL
 
 ENV MQTT_PASSWORD=$MQTT_PASSWORD
 ENV MQTT_USERNAME=$MQTT_USERNAME
 ENV MQTT_TOPIC=$MQTT_TOPIC
 ENV MQTT_BROKER=$MQTT_BROKER
-ENV WEATHER_API_KEY=$WEATHER_API_KEY
-ENV WEATHER_API_URL=$WEATHER_API_URL
 
 # Download the code
 RUN git clone https://github.com/jgarff/rpi_ws281x.git
