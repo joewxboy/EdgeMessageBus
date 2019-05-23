@@ -100,11 +100,11 @@ def on_message(client, userdata, msg):
   params = default_params()
   shortcast = ""
   iconcode = "44" ## n/a icon
-  print(msg.topic)
+  # print(msg.topic)
   str_payload = json.loads(msg.payload)
   if str_payload["type"] == "weather":
     cond = str_payload["data"][0]
-    print(cond)
+    # print(cond)
     if cond["day"]:
         shortcast = cond["day"]["shortcast"]
         iconcode = cond["day"]["icon_code"]
@@ -114,7 +114,7 @@ def on_message(client, userdata, msg):
     print(shortcast)
     print(iconcode)
     icon_cond = icon_dict[iconcode]
-    print(type(icon_cond))
+    # print(type(icon_cond))
     if isinstance(icon_cond, basestring):
         display_condition(icon_cond)
         msgPayload = create_message("display", icon_cond, "")
