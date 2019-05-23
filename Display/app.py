@@ -102,6 +102,7 @@ def on_message(client, userdata, msg):
   iconcode = "44" ## n/a icon
   # print(msg.topic)
   str_payload = json.loads(msg.payload)
+  print("Saw payload: "+str_payload["type"])
   if str_payload["type"] == "weather":
     cond = str_payload["data"][0]
     # print(cond)
