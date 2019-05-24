@@ -29,7 +29,7 @@ NOTE: Change `/home/pi` to your path prefix.
 sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
   -t mosqtt -f- ./ < Dockerfile.armhf
-sudo docker run --rm -it -p 1883:1883 --name myqt mosqtt
+sudo docker run --rm -it -p 1883:1883 mosqtt
 ```
 
 ### End of Installing MQTT
@@ -92,7 +92,7 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg WEATHER_API_KEY=${WEATHER_API_KEY} \
   --build-arg WEATHER_API_URL=${WEATHER_API_URL} \
   ./ -t wxapi
-sudo docker run --rm -it --link myqt:myqt wxapi
+sudo docker run --rm -it wxapi
 ```
 
 ### End of Installing the Weather API
@@ -133,7 +133,7 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg WEATHER_API_KEY=${WEATHER_API_KEY} \
   --build-arg WEATHER_API_URL=${WEATHER_API_URL} \
   ./ -t wxhat-pdm
-sudo docker run --rm -it --device /dev/i2c-1 --privileged --link myqt:myqt wxhat-pdm
+sudo docker run --rm -it --device /dev/i2c-1 --privileged wxhat-pdm
 ```
 
 ### End of Installing the WeatherHAT Display
@@ -167,7 +167,7 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
   --build-arg MQTT_BROKER=${MQTT_BROKER} \
   -t nred -f- ./ < Dockerfile.armhf
-sudo docker run --rm -it -p 1880:1880 --link myqt:myqt nred
+sudo docker run --rm -it -p 1880:1880 nred
 ```
 
 NOTE: The above refers to a Dockerfile for the `armhf` architecture, like the Raspberry Pi. 

@@ -96,7 +96,7 @@ def on_message(client, userdata, msg):
   iconcode = "44" ## n/a icon
   # print(msg.topic)
   str_payload = json.loads(msg.payload)
-  print("Saw payload: "+str_payload["type"])
+  # print("Saw payload: "+str_payload["type"])
   if str_payload["type"] == "weather":
     cond = str_payload["data"][0]
     # print(cond)
@@ -106,20 +106,20 @@ def on_message(client, userdata, msg):
     elif "night" in cond:
         shortcast = cond["night"]["shortcast"]
         iconcode = cond["night"]["icon_code"]
-    print(iconcode)
-    print(shortcast)
+    # print(iconcode)
+    # print(shortcast)
     icon_cond = icon_dict[iconcode]
     # print(type(icon_cond))
     if type(icon_cond) == str:
         display_condition(icon_cond)
         msgPayload = create_message("display", icon_cond, "")
-        print(msgPayload)
+        # print(msgPayload)
         client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
     elif type(icon_cond) == list:
         for icon in icon_cond:
             display_condition(icon)
             msgPayload = create_message("display", icon, "")
-            print(msgPayload)
+            # print(msgPayload)
             client.publish(params['mqttTopic'], msgPayload, qos=0, retain=False)
     
 params = default_params()
