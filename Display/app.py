@@ -1,11 +1,10 @@
 import json
-
+import threading
 import paho.mqtt.client as mqtt
 
 from msgutil import create_message
 from apiutil import default_params
 from weatherhat import WeatherHat
-from time import sleep
 
 wh = WeatherHat()
 
@@ -63,28 +62,23 @@ icon_dict = [
 def display_condition(condition):
     if(condition == "sun"):
         wh.sun("start")
-        sleep(5)
-        wh.sun("stop")
+        threading.Timer(5.0, wh.sun, ["stop"]).start()
         return "Showing sun", 200
     elif(condition == "cloud"):
         wh.cloud("start")
-        sleep(5)
-        wh.cloud("stop")
+        threading.Timer(5.0, wh.cloud, ["stop"]).start()
         return "Showing cloud", 200
     elif(condition == "raining"):
         wh.raining("start")
-        sleep(5)
-        wh.raining("stop")
+        threading.Timer(5.0, wh.raining, ["stop"]).start()
         return "Showing raining", 200
     elif(condition == "storm"):
         wh.storm("start")
-        sleep(5)
-        wh.storm("stop")
+        threading.Timer(5.0, wh.storm, ["stop"]).start()
         return "Showing storm", 200
     elif(condition == "rainbow"):
         wh.rainbow("start")
-        sleep(5)
-        wh.rainbow("stop")
+        threading.Timer(5.0, wh.rainbow, ["stop"]).start()
         return "Showing rainbow", 200
     else:
         return "Condition not found", 404
