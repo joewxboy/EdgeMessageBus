@@ -100,10 +100,10 @@ def on_message(client, userdata, msg):
   if str_payload["type"] == "weather":
     cond = str_payload["data"][0]
     # print(cond)
-    if cond["day"]:
+    if "day" in cond:
         shortcast = cond["day"]["shortcast"]
         iconcode = cond["day"]["icon_code"]
-    elif cond["night"]:
+    elif "night" in cond:
         shortcast = cond["night"]["shortcast"]
         iconcode = cond["night"]["icon_code"]
     print(iconcode)
