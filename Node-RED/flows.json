@@ -132,7 +132,11 @@
         "closePayload": "",
         "willTopic": "",
         "willQos": "0",
-        "willPayload": ""
+        "willPayload": "",
+        "credentials": {
+            "user": "{{MQTT_USERNAME}}",
+            "password": "{{MQTT-PASSWORD}}"
+        }
     },
     {
         "id": "3f52f8fc.cc1bf8",
