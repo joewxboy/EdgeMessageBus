@@ -130,8 +130,6 @@ sudo docker build --build-arg MQTT_PASSWORD=${MQTT_PASSWORD} \
   --build-arg MQTT_USERNAME=${MQTT_USERNAME} \
   --build-arg MQTT_TOPIC=${MQTT_TOPIC} \
   --build-arg MQTT_BROKER=${MQTT_BROKER} \
-  --build-arg WEATHER_API_KEY=${WEATHER_API_KEY} \
-  --build-arg WEATHER_API_URL=${WEATHER_API_URL} \
   ./ -t wxhat-pdm
 sudo docker run --rm -it --device /dev/i2c-1 --privileged wxhat-pdm
 ```
